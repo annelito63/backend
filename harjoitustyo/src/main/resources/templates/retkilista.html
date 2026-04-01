@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Retket</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+</head>
+<header class="text-center"><img src="/kuvat/image4.jpeg" th:src="@{/kuvat/image4.jpeg}" alt="kuva" width="150">
+	<img src="/kuvat/image0.jpeg" th:src="@{/kuvat/image0.jpeg}" alt="kuva" width="145">
+	<img src="/kuvat/image6.jpeg" th:src="@{/kuvat/image6.jpeg}" alt="kuva" width="163">
+	<img src="/kuvat/image7.jpeg" th:src="@{/kuvat/image7.jpeg}" alt="kuva" width="150">
+	<img src="/kuvat/image8.jpeg" th:src="@{/kuvat/image8.jpeg}" alt="kuva" width="130">
+	<img src="/kuvat/image1.jpeg" th:src="@{/kuvat/image1.jpeg}" alt="kuva" width="150">
+	<img src="/kuvat/image3.jpeg" th:src="@{/kuvat/image3.jpeg}" alt="kuva" width="150">
+	<img src="/kuvat/image5.jpeg" th:src="@{/kuvat/image5.jpeg}" alt="kuva" width="140">
+</header>
+<body style="background-color: rgba(190, 233, 235, 0.374); margin: 10px;">
+	<form th:action="@{/logout}" method="post" style="padding:20px 0">
+		<input type="submit" value="Sign Out" class="btn btn-sm btn-danger" />
+	</form>
+
+	<h1>Linturetket</h1>
+	<div class="col-md-4" style="padding:20px 0">
+
+
+	</div>
+	<table class="table table-striped table-info">
+		<tr>
+			<th>Nimi</th>
+			<th>Päivämäärä</th>
+			<th>Havainto</th>
+			<th>Paikka</th>
+			<th>Kuvaus</th>
+			<th></th>
+			<th></th>
+
+		</tr>
+		<tr th:each="retki : ${retket}">
+			<td th:text="${retki.nimi}"></td>
+			<td th:text="${retki.pvm}"></td>
+			<td>
+				<ul>
+					<li th:each="havainto : ${retki.havainnot}">
+						<span th:text="${havainto.nimi}"></span>
+					</li>
+				</ul>
+			</td>
+			<td>
+				<ul>
+					<li th:each="havainto : ${retki.havainnot}">
+						<span th:text="${havainto.paikka}"></span>
+					</li>
+				</ul>
+			</td>
+			<td th:text="${retki.kuvaus}"></td>
+			<td sec:authorize="hasAuthority ('ROLE_ADMIN')"><a th:href="@{/deleteretki/{id}(id=${retki.retkiId})}"
+					class="btn btn-sm btn-danger">Poista</a></td>
+			<td sec:authorize="hasAuthority ('ROLE_ADMIN')"><a th:href="@{/editretki/{id}(id=${retki.retkiId})}"
+					class="btn btn-sm btn-danger">Muokkaa</a></td>
+		</tr>
+	</table>
+	<a href="/addretki" class="btn btn btn-sm btn-success" style="font-size: 20px">Lisää retki</a>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Lisää havainto</title>
+    <meta charset="UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+</head>
+
+<body style="background-color: rgba(190, 233, 235, 0.374); margin: 10px;" >
+    <h1>Lisää havainnot</h1>
+
+    <form th:object="${havainto}" th:action="@{/saveaddhavainto/{id}(id=${retki.retkiId})}" action="#" method="post">
+        <label>Nimi</label>
+        <input th:field="*{nimi}" type="text" />
+        <div th:if="${#fields.hasErrors('nimi')}" th:errors="*{nimi}">Error</div>
+        <div style="clear: both; display: block; height: 10px;"></div>
+
+        <label>Paikka</label>
+        <input th:field="*{paikka}" type="text" />
+        <div th:if="${#fields.hasErrors('paikka')}" th:errors="*{paikka}">Error</div>
+        <div style="clear: both; display: block; height: 10px;"></div>
+
+
+
+        <input type="submit" value="Lisää havainto" class="btn btn btn-sm btn-success" />
+
+
+
+    </form>
+     <br />
+    <div>
+        <a th:href="@{/retkilista}" class="btn btn-sm btn-success" style="font-size: 20px">Tallenna</a>
+    </div>
+    <h2>Lisätyt havainnot</h2>
+
+    <table class="table">
+
+        <tr>
+            <th>Nimi</th>
+            <th>Paikka</th>
+        </tr>
+
+
+        <tr th:each="havainto : ${retki.havainnot}">
+            <td th:text="${havainto.nimi}"></td>
+            <td th:text="${havainto.paikka}"></td>
+        </tr>
+
+    </table>
+
+</body>
+
+</html>
