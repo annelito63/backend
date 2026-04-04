@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Lisää retki</title>
+    <meta charset="UTF-8" />
+    	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+</head>
+<header class="text-center"><img src="/kuvat/image4.jpeg" th:src="@{/kuvat/image4.jpeg}" alt="kuva" width="150">
+    <img src="/kuvat/image0.jpeg" th:src="@{/kuvat/image0.jpeg}" alt="kuva" width="145">
+    <img src="/kuvat/image6.jpeg" th:src="@{/kuvat/image6.jpeg}" alt="kuva" width="163">
+    <img src="/kuvat/image7.jpeg" th:src="@{/kuvat/image7.jpeg}" alt="kuva" width="150">
+    <img src="/kuvat/image8.jpeg" th:src="@{/kuvat/image8.jpeg}" alt="kuva" width="130">
+    <img src="/kuvat/image1.jpeg" th:src="@{/kuvat/image1.jpeg}" alt="kuva" width="150">
+    <img src="/kuvat/image3.jpeg" th:src="@{/kuvat/image3.jpeg}" alt="kuva" width="150">
+    <img src="/kuvat/image5.jpeg" th:src="@{/kuvat/image5.jpeg}" alt="kuva" width="140">
+</header>
+<body style="background-color: rgba(190, 233, 235, 0.374); margin: 10px;" >
+    <h1>Lisää retki</h1>
+
+    <form th:object="${retki}" th:action="@{/saveadd}" action="#" method="post">
+        <label>Nimi</label>
+        <input th:field="*{nimi}" type="text" />
+        <div th:if="${#fields.hasErrors('nimi')}" th:errors="*{nimi}">Error</div>
+        <div style="clear: both; display: block; height: 10px;"></div>
+
+        <label>Päivämäärä</label>
+        <input th:field="*{pvm}" type="text" />
+        <div th:if="${#fields.hasErrors('pvm')}" th:errors="*{pvm}">Error</div>
+        <div style="clear: both; display: block; height: 10px;"></div>
+
+
+        <label>Kuvaus</label>
+        <input th:field="*{kuvaus}" type="text" />
+
+
+
+        <br /><br />
+        <input type="submit" value="Lisää havainnot" class="btn btn btn-sm btn-success" />
+
+    </form>
+
+</body>
+
+</html>

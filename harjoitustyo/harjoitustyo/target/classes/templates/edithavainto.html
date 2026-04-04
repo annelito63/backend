@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Muokkaa havaintoja</title>
+    <meta charset="UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+</head>
+
+<body style="background-color: rgba(190, 233, 235, 0.374); margin: 10px;" >
+    <form th:object="${retki}" th:action="@{/saveedithavainto}" action="#" method="post">
+<input type="hidden" th:field="*{retkiId}" />
+        <div th:each="havainto, i : *{havainnot}">
+            <input type="hidden" th:field="*{havainnot[__${i.index}__].id}" />
+
+            <label>Nimi</label>
+            <input th:field="*{havainnot[__${i.index}__].nimi}" type="text" />
+            <div style="clear: both; display: block; height: 10px;"></div>
+
+            <label>Paikka</label>
+            <input th:field="*{havainnot[__${i.index}__].paikka}" type="text" />
+            <div style="clear: both; display: block; height: 10px;"></div>
+
+        </div>
+<!--         <input type="submit" value="Tallenna" class="btn btn-sm btn-success" style="font-size: 20px"></input>
+ -->    
+  <div style="padding-top: 10px;">
+
+            <input type="submit" name="action" value="Tallenna ja lisää havaintoja" class="btn btn-sm btn-success" />
+        </div>
+
+        <div style="padding-top: 10px;">
+            <input type="submit" name="action" value="Tallenna" class="btn btn-sm btn-success"
+                style="font-size: 20px"></input>
+        </div>
+</form>
+
+
+</body>
+
+</html>
